@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Violencia Verbal</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.23.7/dist/css/uikit.min.css" />
+
+</head>
+<body>
+    <div class="uk-flex uk-flex-column uk-flex-row@m uk-width-1-1 uk-container">
+        <div class="uk-width-1-1 uk-width-2-5@m">
+            <div class="uk-flex uk-flex-column">
+                <div class="uk-panel uk-margin-large-top">
+                    <img class="uk-align-left uk-margin-remove-adjacent" src="../img/3.png" width="225" height="150" alt="Example image">
+                    <h1 id="categoria"></h1>
+                    <p id="definicion"></p>
+                </div>
+            </div>
+            <div></div>            
+        </div>
+        <div class="uk-width-1-1 uk-width-3-5@m">
+            <div>
+                <div class="uk-child-width-1-2@s uk-grid-collapse uk-grid-match uk-text-center" uk-grid>
+                    <div>
+                        <div class="uk-tile uk-margin-remove uk-padding-small">                    
+                            <div class="uk-panel uk-light">
+                            </div>                    
+                            <div class="uk-card uk-card-default uk-card-body">
+                                <p id="testimonio1"></p>
+                            </div>                    
+                        </div>
+                    </div>
+                    <div>
+                        <div class="uk-tile uk-margin-remove uk-padding-small">                    
+                            <div class="uk-panel uk-light">
+                            </div>                    
+                            <div class="uk-card uk-card-default uk-card-body">
+                                <p id="testimonio2"></p>
+                            </div>                    
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="uk-child-width-1-2@s uk-grid-collapse uk-grid-match uk-text-center" uk-grid>
+                    <div>
+                        <div class="uk-tile uk-margin-remove uk-padding-small">                    
+                            <div class="uk-panel uk-light">
+                            </div>                    
+                            <div class="uk-card uk-card-default uk-card-body">
+                                <p id="testimonio3"></p>
+                            </div>                    
+                        </div>
+                    </div>
+                    <div>
+                        <div class="uk-tile uk-margin-remove uk-padding-small">                    
+                            <div class="uk-panel uk-light">
+                            </div>                    
+                            <div class="uk-card uk-card-default uk-card-body">
+                                <p id="testimonio4"></p>
+                            </div>                    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script>
+    async function leerExcelComoArray() {
+      const response = await fetch('../tablaFinal.xlsx');
+      const data = await response.arrayBuffer();
+      const workbook = XLSX.read(data, { type: 'array' });
+
+      const sheet = workbook.Sheets[workbook.SheetNames[0]];
+      const arrayDeDatos = XLSX.utils.sheet_to_json(sheet);
+
+      console.log('Array de objetos:', arrayDeDatos); // 👀 Aquí ya tienes tu array usable
+
+      // Ejemplo de uso: mostrar todos los valores de una columna llamada "Nombre"
+      arrayDeDatos.forEach(fila => {
+        console.log(fila.Nombre);
+      });
+
+      document.getElementById('categoria').innerText = arrayDeDatos[3].Categoria;
+      document.getElementById('definicion').innerText = arrayDeDatos[3].Definicion;
+      document.getElementById('testimonio1').innerText = arrayDeDatos[3].testimonio1;
+      document.getElementById('testimonio2').innerText = arrayDeDatos[3].testimonio2;
+      document.getElementById('testimonio3').innerText = arrayDeDatos[3].testimonio3;
+      document.getElementById('testimonio4').innerText = arrayDeDatos[3].testimonio4;
+
+    }
+
+    leerExcelComoArray();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.23.7/dist/js/uikit.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.23.7/dist/js/uikit-icons.min.js"></script>
+</html>
