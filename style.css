@@ -1,0 +1,21 @@
+#gallery {
+  width: 900px;
+  margin: 100px auto;
+}
+.grid-item {
+  width: 280px; /* Ojo: este ancho será usado junto al "gap" */
+  background: rgba(144, 170, 189, 0.7);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  position: absolute;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#gallery:hover .grid-item {
+  opacity: 0.2;
+}
+
+#gallery .grid-item:hover {
+  transform: scale(1.5);
+  opacity: 1;
+}
+
